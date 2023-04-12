@@ -1,11 +1,13 @@
 import client from "../../client";
 import bycrpt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export default {
   Mutation: {
     editProfile: async (
       _,
-      { firstName, lastName, username, email, password }
+      { firstName, lastName, username, email, password },
+      { loggedUser }
     ) => {
       let hashed = null;
       if (password) {
@@ -13,7 +15,7 @@ export default {
       }
       const editedUser = await client.user.update({
         where: {
-          id: 1,
+          id: loggedUser.id,
         },
         data: {
           firstName,
