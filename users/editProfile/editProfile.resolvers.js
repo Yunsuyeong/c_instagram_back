@@ -8,12 +8,17 @@ const resolverfn = async (
   { firstName, lastName, username, email, password, bio, avatar },
   { loggedUser }
 ) => {
-  const { filename, createReadStream } = await avatar;
-  const readStream = createReadStream();
-  const writeStream = createWriteStream(
-    `${process.cwd()}/uploads/${Date.now()}-${filename}`
-  );
-  readStream.pipe(writeStream);
+  let avatarUrl = null;
+  if (avatar) {
+    const { filename, createReadStream } = await avatar;
+    const newFilename = `${loggedUser.id}-${Date.now()}-${filename}`;
+    const readStream = createReadStream();
+    const writeStream = createWriteStream(
+      `${process.cwd()}/uploads/${newFilename}`
+    );
+    readStream.pipe(writeStream);
+    avatarUrl = `http://localhost:4000/static/${newFilename}`;
+  }
   let hashed = null;
   if (password) {
     hashed = await bycrpt.hash(password, 10);
@@ -29,6 +34,7 @@ const resolverfn = async (
       email,
       bio,
       ...(hashed && { password: hashed }),
+      ...(avatarUrl && { avatar: avatarUrl }),
     },
   });
   if (editedUser.id) {
