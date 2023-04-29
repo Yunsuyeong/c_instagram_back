@@ -24,6 +24,18 @@ export default {
           photoId: id,
         },
       }),
+    comments: ({ id }) =>
+      client.comment.count({
+        where: {
+          photoId: id,
+        },
+      }),
+    isMine: ({ userId }, _, { loggedUser }) => {
+      if (!loggedUser) {
+        return false;
+      }
+      return userId === loggedUser.id;
+    },
   },
   Hashtag: {
     photos: ({ id }, { page }, { loggedUser }) => {
