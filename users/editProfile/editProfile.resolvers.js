@@ -1,6 +1,6 @@
 import client from "../../client";
 import bycrpt from "bcrypt";
-import { protectResolver } from "../users.utils";
+import { protectedResolver } from "../users.utils";
 import { uploadToS3 } from "../../shared/shared.utils";
 
 const resolverfn = async (
@@ -52,6 +52,6 @@ const resolverfn = async (
 
 export default {
   Mutation: {
-    editProfile: protectResolver(resolverfn),
+    editProfile: protectedResolver(resolverfn),
   },
 };

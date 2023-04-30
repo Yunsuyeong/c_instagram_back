@@ -1,10 +1,10 @@
 import client from "../../client";
-import { protectResolver } from "../../users/users.utils";
+import { protectedResolver } from "../../users/users.utils";
 import { processHashtags } from "../photos.utils";
 
 export default {
   Mutation: {
-    editPhoto: protectResolver(async (_, { id, caption }, { loggedUser }) => {
+    editPhoto: protectedResolver(async (_, { id, caption }, { loggedUser }) => {
       const oldPhoto = await client.photo.findFirst({
         where: {
           id,

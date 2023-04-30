@@ -1,9 +1,9 @@
 import client from "../../client";
-import { protectResolver } from "../../users/users.utils";
+import { protectedResolver } from "../../users/users.utils";
 
 export default {
   Mutation: {
-    deleteComment: protectResolver(async (_, { id }, { loggedUser }) => {
+    deleteComment: protectedResolver(async (_, { id }, { loggedUser }) => {
       const comment = await client.comment.findUnique({
         where: {
           id,

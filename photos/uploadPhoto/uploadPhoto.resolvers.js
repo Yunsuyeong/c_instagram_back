@@ -1,11 +1,11 @@
 import client from "../../client";
 import { uploadToS3 } from "../../shared/shared.utils";
-import { protectResolver } from "../../users/users.utils";
+import { protectedResolver } from "../../users/users.utils";
 import { processHashtags } from "../photos.utils";
 
 export default {
   Mutation: {
-    uploadPhoto: protectResolver(
+    uploadPhoto: protectedResolver(
       async (_, { file, caption }, { loggedUser }) => {
         let hashtagObjs = [];
         if (caption) {
