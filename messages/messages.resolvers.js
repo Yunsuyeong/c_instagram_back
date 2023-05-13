@@ -15,6 +15,9 @@ export default {
         where: {
           roomId: id,
         },
+        orderBy: {
+          createdAt: "asc",
+        },
       }),
     unreadTotal: ({ id }, _, { loggedUser }) => {
       if (!loggedUser) {

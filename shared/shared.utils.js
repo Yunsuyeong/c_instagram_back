@@ -2,14 +2,13 @@ import "dotenv/config";
 import AWS from "aws-sdk";
 import fs from "fs";
 
-AWS.config.update({
-  credentials: {
-    accessKeyId: process.env.AWS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY,
-  },
-});
-
 export const uploadToS3 = async (file, userId, folderName) => {
+  AWS.config.update({
+    credentials: {
+      accessKeyId: process.env.AWS_KEY,
+      secretAccessKey: process.env.AWS_SECRET_KEY,
+    },
+  });
   const { filename, createReadStream } = await file;
   const readStream = createReadStream();
   const objectName = `${folderName}/${userId}-${Date.now()}-${filename}`;
