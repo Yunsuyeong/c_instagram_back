@@ -1,5 +1,5 @@
 import client from "../../client";
-import bycrpt from "bcrypt";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export default {
@@ -16,7 +16,7 @@ export default {
           error: "User not found.",
         };
       }
-      const passwordOk = await bycrpt.compare(password, user.password);
+      const passwordOk = await bcrypt.compare(password, user.password);
       if (!passwordOk) {
         return {
           ok: false,
