@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon --exec babel-node server",
+    "dev": "nodemon --exec babel-node src/server",
     "migrate": "npx prisma migrate dev",
     "studio": "npx prisma studio",
-    "build": "tsc --build"
+    "build": "babel src --out-dir build",
+    "start": "node build/server"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/Yunsuyeong/c_instagram_back#readme",
   "dependencies": {
+    "@babel/cli": "^7.22.9",
     "@prisma/client": "^4.12.0",
     "apollo-server": "^2.19.1",
     "apollo-server-express": "2.19",
@@ -39,7 +41,7 @@
     "@babel/preset-env": "^7.21.4",
     "nodemon": "^2.0.22",
     "prettier-plugin-prisma": "^4.12.0",
-    "prisma": "^4.12.0",
+    "prisma": "^4.16.2",
     "ts-node": "^10.9.1"
   }
 }
